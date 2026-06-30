@@ -90,8 +90,6 @@ The grey rack-like boxes are the movable shelves. When a robot receives a comman
 
 ## Class relationship graph
 
-## Class relationship graph
-
 ```mermaid
 classDiagram
 direction LR
