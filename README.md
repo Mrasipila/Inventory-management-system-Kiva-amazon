@@ -1,5 +1,7 @@
 # Warehouse Inventory Simulation (raylib + C++)
 
+https://github.com/user-attachments/assets/4fa126aa-4142-4916-8d48-fdd59c958bf3
+
 This project is now a goods-to-person warehouse simulator inspired by Amazon/Kiva-style systems.
 
 The key flow is:
