@@ -90,82 +90,82 @@ The grey rack-like boxes are the movable shelves. When a robot receives a comman
 
 ## Class relationship graph
 
+## Class relationship graph
+
 ```mermaid
 classDiagram
-  class Simulation {
-    +Reset()
-    +Update(dt)
-    -SeedSkus()
-    -SeedPods()
-    -SeedRobots()
-    -SpawnOrderIfNeeded()
-    -DispatchQueuedTasks()
-    -UpdateRobots(dt)
-    -FinalizeOrders()
-  }
+direction LR
 
-  class WarehouseMap {
-    +InitializeDefault()
-    +Walkable(cell)
-    +CellToWorld(cell, yOffset)
-  }
+class Simulation {
+  +Reset()
+  +Update(dt)
+  -SeedSkus()
+  -SeedPods()
+  -SeedRobots()
+  -SpawnOrderIfNeeded()
+  -DispatchQueuedTasks()
+  -UpdateRobots(dt)
+  -FinalizeOrders()
+}
 
-  class PathFinder {
-    +FindPath(map, start, goal, reserved)
-  }
+class WarehouseMap {
+  +InitializeDefault()
+  +Walkable(cell)
+  +CellToWorld(cell, yOffset)
+}
 
-  class OrderGenerator {
-    +Generate(orderId, now, skus)
-  }
+class PathFinder {
+  +FindPath(map, start, goal, reserved)
+}
 
-  class TaskDispatcher {
-    +CreateTasksForOrder(order, pods, map, skus, nextTaskId, stockouts)
-  }
+class OrderGenerator {
+  +Generate(orderId, now, skus)
+}
 
-  class Pod {
-    +HasSku(skuId, quantity)
-    +ReserveSku(skuId, quantity)
-    +AddSku(skuId, quantity)
-  }
+class TaskDispatcher {
+  +CreateTasksForOrder(order, pods, map, skus, nextTaskId, stockouts)
+}
 
-  class Robot {
-    +SetPath(path)
-    +SetState(state)
-    +IsIdle()
-  }
+class Pod {
+  +HasSku(skuId, quantity)
+  +ReserveSku(skuId, quantity)
+  +AddSku(skuId, quantity)
+}
 
-  class Task {
-  }
+class Robot {
+  +SetPath(path)
+  +SetState(state)
+  +IsIdle()
+}
 
-  class Order {
-  }
+class Task
+class Order
+class OrderLine
+class SKU
 
-  class OrderLine {
-  }
+class Renderer {
+  +Draw(simulation, camera, topDown)
+}
 
-  class SKU {
-  }
+Simulation --> WarehouseMap
+Simulation --> PathFinder
+Simulation --> OrderGenerator
+Simulation --> TaskDispatcher
+Simulation --> Pod
+Simulation --> Robot
+Simulation --> Task
+Simulation --> Order
+Simulation --> SKU
 
-  class Renderer {
-    +Draw(simulation, camera, topDown)
-  }
+Order *-- OrderLine
 
-  Simulation --> WarehouseMap
-  Simulation --> PathFinder
-  Simulation --> OrderGenerator
-  Simulation --> TaskDispatcher
-  Simulation --> Pod
-  Simulation --> Robot
-  Simulation --> Task
-  Simulation --> Order
-  Simulation --> SKU
-  Order *-- OrderLine
-  TaskDispatcher --> Pod
-  TaskDispatcher --> Order
-  TaskDispatcher --> SKU
-  TaskDispatcher --> WarehouseMap
-  PathFinder --> WarehouseMap
-  Renderer --> Simulation
+TaskDispatcher --> Pod
+TaskDispatcher --> Order
+TaskDispatcher --> SKU
+TaskDispatcher --> WarehouseMap
+
+PathFinder --> WarehouseMap
+Renderer --> Simulation
 ```
 
 ## Build
